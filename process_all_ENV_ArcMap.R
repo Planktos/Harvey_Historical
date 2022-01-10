@@ -27,3 +27,5 @@ get_storm <- function(cruise){
 }
 
 d$storm <- sapply(X = d$seamap_cruise, FUN = get_storm)
+
+write.csv(x = d, file = "all_ENV_historical.csv", row.names = F)
