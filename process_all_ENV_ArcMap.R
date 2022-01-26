@@ -29,3 +29,10 @@ get_storm <- function(cruise){
 d$storm <- sapply(X = d$seamap_cruise, FUN = get_storm)
 
 write.csv(x = d, file = "all_ENV_historical.csv", row.names = F)
+
+#get 'non-storm' yearly averages
+library(tidyverse)
+n <- d[d$storm == "None",]
+ns <- n %>% group_by(seamap_stn, storm) %>% summarise(salinity_avg = mean(salinity), water_temp_avg = mean(water_temp), lat = mean(lat), lon=mean(lon))
+
+write.csv(x = ns, file = "none_storm_ENV.csv", row.names = F)
